@@ -1,10 +1,9 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
 import Category from './Category';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../Shared/Loading/Loading';
 
 const AllCategories = () => {
-    // const categories = useLoaderData();
     const { data: categories, isLoading, refetch } = useQuery({
         queryKey: ['categories'],
         queryFn: () => fetch('http://localhost:4000/categories')
@@ -12,7 +11,7 @@ const AllCategories = () => {
     });
 
     if (isLoading) {
-        return 'loading';
+        return <Loading></Loading>;
     }
 
     return (

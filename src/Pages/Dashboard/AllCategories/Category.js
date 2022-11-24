@@ -1,4 +1,6 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const EachCategory = ({ category, refetch }) => {
     const { _id, name, image } = category;
@@ -16,12 +18,9 @@ const EachCategory = ({ category, refetch }) => {
                 console.log(data);
                 if (data.deletedCount === 1) {
                     refetch();
+                    toast.success('deleted successfully');
                 }
             });
-    }
-
-    const handleUpdateCategory = (category) => {
-        console.log(category)
     }
 
     return (
@@ -37,7 +36,7 @@ const EachCategory = ({ category, refetch }) => {
             </td>
             <td className='text-center'>{name}</td>
             <td className='text-center'>
-                <button onClick={() => handleUpdateCategory(category)} className="btn btn-info btn-xs mr-2">Update</button>
+                <Link to={`/dashboard/updatecategory/${_id}`}><button className="btn btn-info btn-xs mr-2">Update</button></Link>
                 <button onClick={() => handleDeleteCategory(_id)} className="btn btn-error btn-xs">Delete</button>
             </td>
         </tr>

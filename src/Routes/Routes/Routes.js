@@ -4,6 +4,7 @@ import Main from "../../Layout/Main";
 import AddACategory from "../../Pages/Dashboard/AddACategory/AddACategory";
 import AddAProduct from "../../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllCategories from "../../Pages/Dashboard/AllCategories/AllCategories";
+import UpdateCategory from "../../Pages/Dashboard/AllCategories/UpdateCategory";
 import EachCategory from "../../Pages/EachCategory/EachCategory";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
@@ -47,9 +48,13 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allcategories',
-                element: <AllCategories></AllCategories>,
-                loader: () => fetch('http://localhost:4000/categories')
+                element: <AllCategories></AllCategories>
             },
+            {
+                path: '/dashboard/updatecategory/:id',
+                element: <UpdateCategory></UpdateCategory>,
+                loader: ({ params }) => fetch(`http://localhost:4000/categories/${params.id}`)
+            }
 
         ]
     },
