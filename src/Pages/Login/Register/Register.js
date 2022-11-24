@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
+
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [error, setError] = useState('');
+
+    const { signUpUser, signInWithGoogle } = useContext(AuthContext);
 
     const onSubmit = data => {
         console.log(data);
+        signUpUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log('register page', user);
+            })
+            .catch(error => {
+                setError(error.message)
+            })
     };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                const signedUser = result.user;
+                // navigate(from, { replace: true });
+            })
+            .catch(error => setError(error.message));
+    }
 
     return (
         <div className='mx-auto max-w-screen-lg grid grid-cols-1 lg:grid-cols-2 my-7'>
@@ -40,14 +62,15 @@ const Register = () => {
                     </select>
                 </div>
                 <div>
-                    <p className='text-red-600'>firebase errors</p>
+                    {/* firebase errors */}
+                    <p className='text-red-600'>{error}</p>
                 </div>
                 <div className="form-control mt-6">
                     <button type='submit' className="btn btn-info">Register</button>
                 </div>
             </form >
             <div className='flex items-center justify-center'>
-                <button className='border border-blue-900 px-4 py-2 flex items-center'>Login with google <FcGoogle className='ml-2' /></button>
+                <button onClick={handleGoogleSignIn} className='border border-blue-900 px-4 py-2 flex items-center'>Login with google <FcGoogle className='ml-2' /></button>
             </div>
         </div >
     );

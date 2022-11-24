@@ -1,37 +1,69 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
+
 
 const Login = () => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [error, setError] = useState('');
+
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+
+    const onSubmit = data => {
+        console.log(data);
+        signInUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log('Login page', user);
+            })
+            .catch(error => {
+                setError(error.message)
+            })
+    };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                const signedUser = result.user;
+                // navigate(from, { replace: true });
+            })
+            .catch(error => setError(error.message));
+    }
+
     return (
         <div className='mx-auto max-w-screen-lg grid grid-cols-1 lg:grid-cols-2 my-7'>
-            <form className="card-body border border-blue-900">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body border border-blue-900">
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input name="email" type="email" placeholder="email" className="input input-bordered" required />
+                    <input {...register('email', { required: 'provide your email' })} name="email" type="email" placeholder="email" className="input input-bordered" />
+                    {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Password</span>
                     </label>
-                    <input name="password" type="password" placeholder="password" className="input input-bordered" required />
+                    <input {...register('password', { required: 'provide your password' })} name="password" type="password" placeholder="password" className="input input-bordered" />
+                    {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     <label className="label">
                         <Link to="/register" className="label-text-alt link link-hover">Do not have an account? Sign Up</Link>
                     </label>
                 </div>
                 <div>
-                    <p className='text-red-600'>errors</p>
+                    {/* firebase errors */}
+                    <p className='text-red-600'>{error}</p>
                 </div>
                 <div className="form-control mt-6">
                     <button type='submit' className="btn btn-info">Login</button>
                 </div>
-            </form>
+            </form >
             <div className='flex items-center justify-center'>
-                <button className='border border-blue-900 px-4 py-2 flex items-center'>Login with google <FcGoogle className='ml-2' /></button>
+                <button onClick={handleGoogleSignIn} className='border border-blue-900 px-4 py-2 flex items-center'>Login with google <FcGoogle className='ml-2' /></button>
             </div>
-        </div>
+        </div >
     );
 };
 

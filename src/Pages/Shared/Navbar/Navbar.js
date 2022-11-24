@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { PhoneIcon } from '@heroicons/react/24/solid';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOutUser } = useContext(AuthContext);
+
     const menuItems = <>
         <li><Link to='/' className='link link-hover'>Home</Link></li>
     </>;
+
+    const handleLogOut = () => {
+        console.log('logout clicked')
+        logOutUser()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
     return (
         <div>
             <div className='bg-base-100'>
@@ -41,8 +51,15 @@ const Navbar = () => {
                     </div>
                     <div className="flex-none">
                         <ul className='p-0 menu menu-horizontal'>
-                            <li><Link to="/login" className='link link-hover'>Login</Link></li>
-                            <li><Link to="/register" className='link link-hover'>Sign Up</Link></li>
+                            {
+                                user?.uid ?
+                                    <li onClick={handleLogOut} className='link link-hover'>Logout</li>
+                                    :
+                                    <>
+                                        <li><Link to="/login" className='link link-hover'>Login</Link></li>
+                                        <li><Link to="/register" className='link link-hover'>Sign Up</Link></li>
+                                    </>
+                            }
                         </ul>
                     </div>
                 </div>
