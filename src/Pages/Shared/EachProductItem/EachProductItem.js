@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 
-const EachItem = () => {
+const EachProductItem = () => {
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
@@ -27,4 +27,4 @@ const EachItem = () => {
     );
 };
 
-export default EachItem;
+export default EachProductItem;
