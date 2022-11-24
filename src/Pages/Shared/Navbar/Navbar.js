@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PhoneIcon } from '@heroicons/react/24/solid'
+import { PhoneIcon } from '@heroicons/react/24/solid';
 
 const Navbar = () => {
     const menuItems = <>
