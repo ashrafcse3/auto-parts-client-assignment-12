@@ -10,7 +10,7 @@ const AddAProduct = () => {
     };
 
     return (
-        <div className='pl-5'>
+        <div className='p-5'>
             <h1 className='text-3xl font-bold mb-2 text-blue-900'>Add a product</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body border border-blue-900">
                 <div className="form-control">
@@ -19,6 +19,18 @@ const AddAProduct = () => {
                     </label>
                     <input {...register('name', { required: 'provide the product name' })} type="text" placeholder="name" className="input input-bordered" />
                     {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Select the category</span>
+                    </label>
+                    <select {...register('category', { required: 'provide the product category' })} className="select select-bordered w-full">
+                        <option defaultValue>Select an category</option>
+                        <option value='excellent'>Excellent</option>
+                        <option value='fetchcategories'>fetch all category</option>
+                        {/* Loop through all category */}
+                    </select>
+                    {errors.category && <p className='text-red-600'>{errors.category?.message}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
