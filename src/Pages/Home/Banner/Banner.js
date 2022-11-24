@@ -5,7 +5,7 @@ import BannerRightTop from './BannerRightTop';
 
 const Banner = () => {
     return (
-        <div className='bg-gray-200'>
+        <div className='bg-gray-200 p-4'>
             <div className='grid lg:grid-cols-7 gap-4 mx-auto max-w-[1200px] py-8'>
                 <div className='col-span-5 bg-yellow-600'>
                     <BannerLeft></BannerLeft>
