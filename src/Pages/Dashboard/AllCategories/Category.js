@@ -1,9 +1,23 @@
 import React from 'react';
 
-const EachCategory = ({ category }) => {
+const EachCategory = ({ category, refetch }) => {
     const { _id, name, image } = category;
     const handleDeleteCategory = (_id) => {
-        console.log(_id);
+        // console.log(_id);
+
+        fetch(`http://localhost:4000/categories/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount === 1) {
+                    refetch();
+                }
+            });
     }
 
     const handleUpdateCategory = (category) => {
