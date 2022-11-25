@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddAProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [categories, setCategories] = useState();
+    const { user } = useContext(AuthContext);
 
+    useEffect(() => {
+        fetch('http://localhost:4000/categories')
+            .then(res => res.json())
+            .then(data => setCategories(data))
+    }, [])
 
     const onSubmit = data => {
-        console.log(data);
+
+        const selectedCategory = categories.find(category => category.name === data.category)
+
+        const newProduct = {
+            name: data.name,
+            category_name: data.category,
+            category_id: selectedCategory._id,
+            image: data.image,
+            description: data.description,
+            condition_type: data.condition_type,
+            original_price: data.original_price,
+            resale_price: data.resale_price,
+            purchased_year: data.purchased_year,
+            posted_on: new Date(),
+            location: data.location,
+            phone: data.phone,
+            sales_status: 'available',
+            seller: user.email
+        }
+        console.log(newProduct);
+        fetch('http://localhost:4000/products', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newProduct)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     };
 
     return (
@@ -25,9 +61,12 @@ const AddAProduct = () => {
                         <span className="label-text">Select the category</span>
                     </label>
                     <select {...register('category', { required: 'provide the product category' })} className="select select-bordered w-full">
-                        <option defaultValue>Select an category</option>
-                        <option value='excellent'>Excellent</option>
-                        <option value='fetchcategories'>fetch all category</option>
+                        {/* <option defaultValue>Select an category</option> */}
+                        {
+                            categories && categories.map((category, index) => <option
+                                key={index}
+                            >{category.name}</option>)
+                        }
                         {/* Loop through all category */}
                     </select>
                     {errors.category && <p className='text-red-600'>{errors.category?.message}</p>}
@@ -51,10 +90,10 @@ const AddAProduct = () => {
                         <span className="label-text">Condition type</span>
                     </label>
                     <select {...register('condition_type', { required: 'provide the product condition' })} className="select select-bordered w-full">
-                        <option defaultValue>Select an option</option>
-                        <option value='excellent'>Excellent</option>
-                        <option value='good'>Good</option>
-                        <option value='fair'>Fair</option>
+                        {/* <option defaultValue>Select an option</option> */}
+                        <option value='Excellent'>Excellent</option>
+                        <option value='Good'>Good</option>
+                        <option value='Fair'>Fair</option>
                     </select>
                     {errors.condition_type && <p className='text-red-600'>{errors.condition_type?.message}</p>}
                 </div>
@@ -78,16 +117,6 @@ const AddAProduct = () => {
                     </label>
                     <input {...register('purchased_year', { required: 'provide the product purchased_year' })} type="text" placeholder="purchased_year" className="input input-bordered" />
                     {errors.purchased_year && <p className='text-red-600'>{errors.purchased_year?.message}</p>}
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Posted on Select it from date function</span>
-                    </label>
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Seller Name: Provide the seller name</span>
-                    </label>
                 </div>
                 <div className="form-control">
                     <label className="label">

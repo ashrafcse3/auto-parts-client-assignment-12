@@ -17,17 +17,40 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log('register page', user);
+                saveUserToDB(data.email, data.options);
             })
             .catch(error => {
                 setError(error.message)
             })
     };
 
+    const saveUserToDB = (email, role) => {
+        const user = { email, role };
+        fetch('http://localhost:4000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+    }
+
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
                 const signedUser = result.user;
                 // navigate(from, { replace: true });
+                // The role will be 'user' for a signed up user with social login
+                fetch(`http://localhost:4000/users/${signedUser.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (!data) {
+                            saveUserToDB(signedUser.email, 'user');
+                        }
+                    })
             })
             .catch(error => setError(error.message));
     }

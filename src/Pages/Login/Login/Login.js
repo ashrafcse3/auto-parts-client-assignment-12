@@ -23,11 +23,33 @@ const Login = () => {
             })
     };
 
+    const saveUserToDB = (email, role) => {
+        const user = { email, role };
+        fetch('http://localhost:4000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
+    }
+
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
                 const signedUser = result.user;
                 // navigate(from, { replace: true });
+                // The role will be 'user' for a signed up user with social login
+                fetch(`http://localhost:4000/users/${signedUser.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (!data) {
+                            saveUserToDB(signedUser.email, 'user');
+                        }
+                    })
             })
             .catch(error => setError(error.message));
     }

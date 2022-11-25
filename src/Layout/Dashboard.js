@@ -15,9 +15,15 @@ const Dashboard = () => {
                     <div className="drawer-side border border-blue-800 rounded-lg">
                         <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                            <li><Link to='/dashboard/addacategory'>Add a Category</Link></li>
-                            <li><Link to='/dashboard/addaproduct'>Add a Product</Link></li>
                             <li><Link to='/dashboard/allcategories'>All categories list</Link></li>
+                            <li><Link to='/dashboard/addacategory'>Add a Category</Link></li>
+                            <hr />
+                            <li><Link to='/dashboard/myproducts'>My products</Link></li>
+                            <li><Link to='/dashboard/addaproduct'>Add a Product</Link></li>
+                            <hr />
+                            <li><Link to='/dashboard/allusers'>All users</Link></li>
+                            <li><Link to='/dashboard/allsellers'>All sellers</Link></li>
+                            <hr />
                         </ul>
 
                     </div>

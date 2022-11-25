@@ -8,6 +8,7 @@ const Navbar = () => {
 
     const menuItems = <>
         <li><Link to='/' className='link link-hover'>Home</Link></li>
+        <li><Link to='/dashboard' className='link link-hover'>Dashboard</Link></li>
     </>;
 
     const handleLogOut = () => {

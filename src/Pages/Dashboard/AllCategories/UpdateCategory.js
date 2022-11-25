@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+
 
 const UpdateCategory = () => {
+    const navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const loadedData = useLoaderData();
@@ -23,7 +26,13 @@ const UpdateCategory = () => {
             body: JSON.stringify(category)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('Category updated successfully');
+                    navigate('/dashboard/allcategories');
+                }
+            })
     };
 
     return (
