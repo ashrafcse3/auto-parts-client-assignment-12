@@ -26,11 +26,11 @@ const AddAProduct = () => {
             condition_type: data.condition_type,
             original_price: data.original_price,
             resale_price: data.resale_price,
+            available_units: data.available_units,
             purchased_year: data.purchased_year,
             posted_on: new Date(),
             location: data.location,
             phone: data.phone,
-            sales_status: 'available',
             seller: user.email
         }
         console.log(newProduct);
@@ -110,6 +110,13 @@ const AddAProduct = () => {
                     </label>
                     <input {...register('resale_price', { required: 'provide the product resale_price' })} name="resale_price" type="text" placeholder="resale_price" className="input input-bordered" />
                     {errors.resale_price && <p className='text-red-600'>{errors.resale_price?.message}</p>}
+                </div>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Available units</span>
+                    </label>
+                    <input {...register('available_units', { required: 'provide the product available_units' })} name="available_units" type="text" placeholder="available_units" className="input input-bordered" />
+                    {errors.available_units && <p className='text-red-600'>{errors.available_units?.message}</p>}
                 </div>
                 <div className="form-control">
                     <label className="label">
