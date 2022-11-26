@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Product = ({ product, index, refetch }) => {
     const { _id, name, available_units, advertise_status } = product;
-    const handleDeleteCategory = (_id) => {
+    const handleDeleteProduct = (_id) => {
         // console.log(_id);
 
         fetch(`http://localhost:4000/categories/${_id}`, {
