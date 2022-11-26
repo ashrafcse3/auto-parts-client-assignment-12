@@ -12,7 +12,7 @@ import EachCategory from "../../Pages/EachCategory/EachCategory";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
-import MyProducts from "../../Pages/MyProducts/MyProducts";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import NotFound from "../../Pages/NotFound/NotFound";
 
 const router = createBrowserRouter([

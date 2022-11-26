@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const AddACategory = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         const category = {
@@ -18,7 +21,13 @@ const AddACategory = () => {
             body: JSON.stringify(category)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success('Category created successfully');
+                    navigate('/dashboard/allcategories');
+                }
+            })
 
         // console.log('category', category);
     };

@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const AddAProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [categories, setCategories] = useState();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:4000/categories')
@@ -42,7 +45,13 @@ const AddAProduct = () => {
             body: JSON.stringify(newProduct)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success('Product created successfully');
+                    navigate('/dashboard/myproducts');
+                }
+            })
     };
 
     return (
@@ -61,7 +70,7 @@ const AddAProduct = () => {
                         <span className="label-text">Select the category</span>
                     </label>
                     <select {...register('category', { required: 'provide the product category' })} className="select select-bordered w-full">
-                        {/* <option defaultValue>Select an category</option> */}
+                        <option defaultValue>Select an category</option>
                         {
                             categories && categories.map((category, index) => <option
                                 key={index}
@@ -115,7 +124,7 @@ const AddAProduct = () => {
                     <label className="label">
                         <span className="label-text">Available units</span>
                     </label>
-                    <input {...register('available_units', { required: 'provide the product available_units' })} name="available_units" type="text" placeholder="available_units" className="input input-bordered" />
+                    <input {...register('available_units', { required: 'provide the product available_units' })} name="available_units" type="text" placeholder="available_units" className="input input-bordered" defaultValue='1' />
                     {errors.available_units && <p className='text-red-600'>{errors.available_units?.message}</p>}
                 </div>
                 <div className="form-control">
