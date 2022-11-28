@@ -16,7 +16,7 @@ const RandomItems = () => {
     }
 
     return (
-        <div className='bg-yellow-100 p-4'>
+        <div className='bg-gray-200 p-4'>
             <div className='mx-auto max-w-[1200px] py-8'>
                 <div className='flex items-center'>
                     <h1 className='text-4xl font-bold mb-3 mr-8'>Random items</h1>

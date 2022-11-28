@@ -14,6 +14,7 @@ import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import NotFound from "../../Pages/NotFound/NotFound";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <EachCategory></EachCategory>,
+                element: <PrivateRoute><EachCategory></EachCategory></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:4000/productbycategory/${params.id}`)
             },
         ],
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <DashboardPage></DashboardPage>
+                element: <PrivateRoute><DashboardPage></DashboardPage></PrivateRoute>
             },
             {
                 path: '/dashboard/addaproduct',

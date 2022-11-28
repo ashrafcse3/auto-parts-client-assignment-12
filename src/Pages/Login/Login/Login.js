@@ -1,15 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [error, setError] = useState('');
 
-    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+    const { user, signInUser, signInWithGoogle } = useContext(AuthContext);
+
+    // if any user is logged in, send them back to home page
+    if (user) return navigate(from, { replace: true });
 
     const onSubmit = data => {
         console.log(data);
@@ -17,6 +24,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log('Login page', user);
+                // send them back to home or from wherever they came
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message)
