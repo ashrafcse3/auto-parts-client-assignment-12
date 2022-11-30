@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import Helmet from 'react-helmet';
 
 
 const Login = () => {
@@ -65,6 +66,9 @@ const Login = () => {
 
     return (
         <div className='mx-auto max-w-screen-lg grid grid-cols-1 lg:grid-cols-2 my-7'>
+            <Helmet>
+                <title>AP | Login</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body border border-blue-900">
                 <div className="form-control">
                     <label className="label">

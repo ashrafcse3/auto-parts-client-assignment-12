@@ -1,15 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
-
+import Helmet from 'react-helmet';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from.pathname || '/';
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [error, setError] = useState('');
 
-    const { signUpUser, signInWithGoogle } = useContext(AuthContext);
+    const { user, signUpUser, signInWithGoogle } = useContext(AuthContext);
+
+    // if any user is logged in, send them back to home page
+    if (user) return navigate(from, { replace: true });
 
     const onSubmit = data => {
         console.log(data);
@@ -57,6 +64,9 @@ const Register = () => {
 
     return (
         <div className='mx-auto max-w-screen-lg grid grid-cols-1 lg:grid-cols-2 my-7'>
+            <Helmet>
+                <title>AP | Register</title>
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body border border-blue-900">
                 <div className="form-control">
                     <label className="label">

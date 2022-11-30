@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { PhoneIcon } from '@heroicons/react/24/solid';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import iconImg from '../../../assets/icons/icon.png';
 
 const Navbar = () => {
     const { user, logOutUser } = useContext(AuthContext);
@@ -26,7 +27,11 @@ const Navbar = () => {
             <div className='bg-base-100'>
                 <div className="navbar mx-auto max-w-[1200px]">
                     <div className="flex-1">
-                        <Link className="text-blue-900 btn btn-ghost normal-case text-3xl font-extrabold">Auto parts</Link>
+                        <Link to='/' className='flex items-center btn btn-ghost normal-case'>
+                            <img className="h-10 mr-2" src={iconImg} alt="" />
+                            <p className="text-blue-900 text-3xl font-extrabold">
+                                Auto parts</p>
+                        </Link>
                     </div>
                     <div>
                         <PhoneIcon className='h-8 w-8 mr-2 text-blue-900' />

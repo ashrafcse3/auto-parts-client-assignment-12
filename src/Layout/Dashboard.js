@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import useSeller from '../hooks/useSeller';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
+import Helmet from 'react-helmet';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
@@ -15,6 +16,9 @@ const Dashboard = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>AP | Dashboard</title>
+            </Helmet>
             <Navbar></Navbar>
             <div className='mx-auto max-w-[1200px] py-8 px-3'>
                 <div className="drawer drawer-mobile">
