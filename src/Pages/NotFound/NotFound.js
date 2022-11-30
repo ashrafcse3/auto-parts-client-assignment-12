@@ -2,10 +2,14 @@ import React from 'react';
 import img3 from '../../assets/images/banner/img3.jpg'
 import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Navbar/Navbar';
+import { Helmet } from 'react-helmet';
 
 const NotFound = () => {
     return (
         <div>
+            <Helmet>
+                <title>AP | 404 Not Found</title>
+            </Helmet>
             <Navbar></Navbar>
             <div className="hero min-h-screen" style={{ backgroundImage: `url(${img3})` }}>
                 <div className="hero-overlay bg-opacity-60"></div>

@@ -14,6 +14,7 @@ const Navbar = () => {
                 <li><Link to='/dashboard' className='link link-hover'>Dashboard</Link></li>
                 : ''
         }
+        <li><Link to='/blog' className='link link-hover'>Blog</Link></li>
     </>;
 
     const handleLogOut = () => {
