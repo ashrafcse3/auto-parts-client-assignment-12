@@ -5,7 +5,21 @@ const AddAPost = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const onSubmit = data => {
-        console.log(data)
+        //  make the user variable dynamic
+        const postDetails = {
+            user: 'admin',
+            question: data.question,
+            answer: data.answer,
+        };
+        fetch('http://localhost:4000/blogs', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(postDetails)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data));
     }
 
     return (

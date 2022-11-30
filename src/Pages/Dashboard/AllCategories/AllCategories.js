@@ -6,7 +6,7 @@ import Loading from '../../Shared/Loading/Loading';
 const AllCategories = () => {
     const { data: categories, isLoading, refetch } = useQuery({
         queryKey: ['categories'],
-        queryFn: () => fetch('http://localhost:4000/categories')
+        queryFn: () => fetch('http://localhost:4000/blogs')
             .then(res => res.json())
     });
 
