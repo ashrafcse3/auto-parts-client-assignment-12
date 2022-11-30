@@ -1,4 +1,9 @@
 # Welcome to my auto parts react app
+
+### live website link
+### server project link
+admin username: admin@resale.com and password: 123456
+
 I have used react js as a front end and express js for the back end. The features which are used throughout the project:
 * Main functionality in the project are: crud products, crud categories
 * For the product section: add, delte, update products and show them by their category id, will show a advertised product section in the home page if there is any product already advertised.
