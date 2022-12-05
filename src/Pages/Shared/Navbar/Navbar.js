@@ -7,6 +7,31 @@ import iconImg from '../../../assets/icons/icon.png';
 const Navbar = () => {
     const { user, logOutUser } = useContext(AuthContext);
 
+    const getUserName = email => {
+        let userName = email.split('@')[0];
+
+        return userName;
+    }
+
+    const getGreeting = () => {
+        const date = new Date();
+        let greetingOfDay;
+
+        const hour = date.getHours();
+
+        if (hour >= 6 && hour < 12) {
+            greetingOfDay = 'Morning';
+        }
+        else if (hour >= 12 && hour < 17) {
+            greetingOfDay = 'Afternoon';
+        }
+        else {
+            greetingOfDay = 'Night';
+        }
+
+        return greetingOfDay;
+    }
+
     const menuItems = <>
         <li><Link to='/' className='link link-hover'>Home</Link></li>
         {
@@ -64,7 +89,10 @@ const Navbar = () => {
                         <ul className='p-0 menu menu-horizontal'>
                             {
                                 user?.uid ?
-                                    <li onClick={handleLogOut} className='link link-hover'>Logout</li>
+                                    <>
+                                        <li className='mr-2'>{`${getGreeting()}, ${getUserName(user.email)}`}</li>
+                                        <li onClick={handleLogOut} className='link link-hover border rounded p-1'>Logout</li>
+                                    </>
                                     :
                                     <>
                                         <li><Link to="/login" className='link link-hover'>Login</Link></li>
