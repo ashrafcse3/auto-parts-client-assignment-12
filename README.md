@@ -1,7 +1,8 @@
 # Welcome to my auto parts react app
 
 ### live website link: https://used-products-resale-eba66.web.app/
-### server git link: https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-ashrafcse3
+### server git link: [Click to see server repo](https://github.com/ashrafcse3/auto-parts-server-assignment-12)
+
 admin username: admin@resale.com and password: 123456
 
 I have used react js as a front end and express js for the back end. The features which are used throughout the project:
