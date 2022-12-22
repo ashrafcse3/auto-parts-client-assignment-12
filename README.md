@@ -1,7 +1,7 @@
 # Welcome to my auto parts react app
 
-### live website link: https://used-products-resale-eba66.web.app/
-### server git link: [Click to see server repo](https://github.com/ashrafcse3/auto-parts-server-assignment-12)
+### Live website link: https://used-products-resale-eba66.web.app/
+### Server git link: [Server repo](https://github.com/ashrafcse3/auto-parts-server-assignment-12)
 
 admin username: admin@resale.com and password: 123456
 
