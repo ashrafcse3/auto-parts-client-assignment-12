@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import useSeller from '../hooks/useSeller';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
@@ -37,12 +37,12 @@ const Dashboard = () => {
                                     <hr />
                                 </>
                             }
-                            <li><Link to='/dashboard/allcategories'>All categories list</Link></li>
-                            <li><Link to='/dashboard/addacategory'>Add a Category</Link></li>
+                            <li><NavLink to='/dashboard/allcategories'>All categories list</NavLink></li>
+                            <li><NavLink to='/dashboard/addacategory'>Add a Category</NavLink></li>
                             <hr />
 
-                            <li><Link to='/dashboard/allusers'>All users</Link></li>
-                            <li><Link to='/dashboard/allsellers'>All sellers</Link></li>
+                            <li><NavLink to='/dashboard/allusers'>All users</NavLink></li>
+                            <li><NavLink to='/dashboard/allsellers'>All sellers</NavLink></li>
                             <hr />
                         </ul>
 

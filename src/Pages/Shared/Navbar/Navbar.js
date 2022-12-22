@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { PhoneIcon } from '@heroicons/react/24/solid';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import iconImg from '../../../assets/icons/icon.png';
@@ -33,13 +33,13 @@ const Navbar = () => {
     }
 
     const menuItems = <>
-        <li><Link to='/' className='link link-hover'>Home</Link></li>
+        <li><NavLink to='/' className='link link-hover'>Home</NavLink></li>
         {
             user?.uid ?
-                <li><Link to='/dashboard' className='link link-hover'>Dashboard</Link></li>
+                <li><NavLink to='/dashboard' className='link link-hover'>Dashboard</NavLink></li>
                 : ''
         }
-        <li><Link to='/blog' className='link link-hover'>Blog</Link></li>
+        <li><NavLink to='/blog' className='link link-hover'>Blog</NavLink></li>
     </>;
 
     const handleLogOut = () => {
@@ -95,8 +95,8 @@ const Navbar = () => {
                                     </>
                                     :
                                     <>
-                                        <li><Link to="/login" className='link link-hover'>Login</Link></li>
-                                        <li><Link to="/register" className='link link-hover'>Sign Up</Link></li>
+                                        <li><NavLink to="/login" className='link link-hover'>Login</NavLink></li>
+                                        <li><NavLink to="/register" className='link link-hover'>Sign Up</NavLink></li>
                                     </>
                             }
                             <label htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
