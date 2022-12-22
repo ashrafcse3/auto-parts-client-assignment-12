@@ -2,9 +2,14 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import EachProductItem from '../Shared/EachProductItem/EachProductItem';
 import Helmet from 'react-helmet';
+import { useState } from 'react';
+import SelectedProdudctModal from './SelectedProdudctModal';
 
 const EachCategory = () => {
     const products = useLoaderData();
+
+    const [selectedProduct, setSelectedProduct] = useState();
+
     return (
         <div className='mx-auto max-w-[1200px] py-8'>
             <Helmet>
@@ -17,9 +22,15 @@ const EachCategory = () => {
                     products.map(product => <EachProductItem
                         key={product._id}
                         product={product}
+                        setSelectedProduct={setSelectedProduct}
                     ></EachProductItem>)
                 }
             </div>
+            {
+                selectedProduct && <SelectedProdudctModal
+                    selectedProduct={selectedProduct}
+                />
+            }
         </div>
     );
 };

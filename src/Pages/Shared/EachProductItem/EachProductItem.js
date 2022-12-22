@@ -2,7 +2,8 @@ import React from 'react';
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import { format } from 'date-fns';
 
-const EachProductItem = ({ product: { name, location, advertise_status, available_units, image, original_price, resale_price, posted_on, purchased_year, seller } }) => {
+const EachProductItem = ({ product: { name, location, advertise_status, available_units, image, original_price, resale_price, posted_on, purchased_year, seller }, product, setSelectedProduct }) => {
+
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure className='h-60'><img src={image} alt="Shoes" /></figure>
@@ -26,7 +27,8 @@ const EachProductItem = ({ product: { name, location, advertise_status, availabl
                     Seller: {seller}
                     <CheckBadgeIcon className="ml-2 badge bg-white text-black" />
                 </div>
-                <button className='btn'>Book now</button>
+                {/* The button to open modal */}
+                <label onClick={() => setSelectedProduct(product)} htmlFor="booking-modal" className='btn text-white'>Book now</label>
             </div>
         </div>
     );
