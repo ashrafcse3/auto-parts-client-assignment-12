@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading/Loading';
 import AddAPost from '../AddAPost/AddAPost';
 import EachPost from '../EachPost/EachPost';
 
 const Blog = () => {
-    const [blogs, setBlogs] = useState();
+    // const [blogs, setBlogs] = useState();
 
-    useEffect(() => {
-        fetch('http://localhost:4000/blogs')
-            .then(res => res.json())
-            .then(data => setBlogs(data))
-    }, []);
-    // const { data: blogs, isLoading, refetch } = useQuery({
-    //     queryKey: ['blogs'],
-    //     queryFn: () => fetch('http://localhost:4000/blogs')
+    // useEffect(() => {
+    //     fetch('http://localhost:4000/blogs')
     //         .then(res => res.json())
-    // });
+    //         .then(data => setBlogs(data))
+    // }, []);
+    const { data: blogs, isLoading, refetch } = useQuery({
+        queryKey: ['blogs'],
+        queryFn: () => fetch('http://localhost:4000/blogs')
+            .then(res => res.json())
+    });
 
-    if (!blogs) {
+    if (isLoading) {
         return <Loading></Loading>;
     }
     return (
@@ -33,7 +32,7 @@ const Blog = () => {
                         ></EachPost>)
                     }
                 </div>
-                <AddAPost></AddAPost>
+                <AddAPost refetch={refetch} />
             </div>
         </div>
     );

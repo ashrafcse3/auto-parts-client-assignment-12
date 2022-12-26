@@ -44,6 +44,8 @@ const Dashboard = () => {
                             <li><NavLink to='/dashboard/allusers'>All users</NavLink></li>
                             <li><NavLink to='/dashboard/allsellers'>All sellers</NavLink></li>
                             <hr />
+
+                            <li><NavLink to='/dashboard/userbookings'>My bookings</NavLink></li>
                         </ul>
 
                     </div>

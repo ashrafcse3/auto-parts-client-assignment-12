@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddAPost = () => {
+const AddAPost = ({ refetch }) => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const onSubmit = data => {
@@ -19,7 +19,10 @@ const AddAPost = () => {
             body: JSON.stringify(postDetails)
         })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                refetch();
+                console.log(data)
+            });
     }
 
     return (
